@@ -1,0 +1,52 @@
+<html>
+</html>
+
+
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+<script type="text/javascript" src="/three.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		var _LEDs = initLEDs(); 
+		var totalLEDs = 7200;
+		var stripLength = 150;
+		var totalStrips = totalLEDs / stripLength;
+
+		function initLEDs() {
+			leds = [];
+			for (i = 0; i < totalStrips; i++) {
+				var strip = [];
+				for (j = 0; j < stripLength; j++) {
+					strip.push(0);
+				}
+				leds.push(strip);
+			}
+			return leds;
+		}
+
+		function formatData(LEDs) {
+			// break the LEDs array into PixelPusher digestible components?
+			// handle that on the Processing Server side?
+		}
+		function sendData(LEDs) {
+			$.ajax({
+				url: "http://localhost:8001",
+				method: "POST",
+				data: {
+					data: LEDs
+				},
+				success: function (r) {
+					console.log(r);
+				},
+				error: function (r) {
+					console.log(r);
+				}
+			})
+		}
+
+
+	});
+
+</script>
